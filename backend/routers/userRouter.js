@@ -33,8 +33,8 @@ userRouter.post(
         //use generateToken to autentiket user and to have protection
         //becouse just valid and autorise user will have token
         //to achive that I am installing jsonwebtoken
+        return;
       }
-      return;
     }
     res.status(401).send({ message: "Invalid email or password" });
   })
