@@ -1,6 +1,16 @@
 import express from "express";
+import mongoose from "mongoose";
+import userRouter from "./routers/userRouter.js";
 import data from "./data.js";
+
 const app = express();
+//conecting to database
+//checking if port for database is alredy exzist
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/shop", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 app.get("/api/products/:id", (req, res) => {
   const product = data.products.find((x) => x._id === req.params.id);
@@ -14,10 +24,15 @@ app.get("/api/products/:id", (req, res) => {
 app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
-
+app.use("/api/users", userRouter);
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
+//this midelver is for chacking errors
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server at http://localhost:${port}`);
