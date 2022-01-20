@@ -1,9 +1,17 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import userRouter from "./routers/userRouter.js";
 import data from "./data.js";
 
+dotenv.config();
+
 const app = express();
+
+//parse body of requst
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //conecting to database
 //checking if port for database is alredy exzist
 mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/shop", {

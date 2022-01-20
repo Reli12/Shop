@@ -1,7 +1,9 @@
+import bcrypt from "bcryptjs/dist/bcrypt.js";
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import data from "../data.js";
 import User from "../models/userModel.js";
+import { generateToken } from "../utils.js";
 
 const userRouter = express.Router();
 
@@ -12,6 +14,29 @@ userRouter.get(
     // await User.remove({});
     const createdUsers = await User.insertMany(data.users);
     res.send({ createdUsers });
+  })
+);
+
+userRouter.post(
+  "/signin",
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        res.send({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user),
+        });
+        //use generateToken to autentiket user and to have protection
+        //becouse just valid and autorise user will have token
+        //to achive that I am installing jsonwebtoken
+      }
+      return;
+    }
+    res.status(401).send({ message: "Invalid email or password" });
   })
 );
 
