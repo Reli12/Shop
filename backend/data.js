@@ -16,7 +16,6 @@ const data = {
   ],
   products: [
     {
-      _id: "1",
       name: "Name 1",
       category: "Shirts",
       image: "/images/p1.jpg",
@@ -28,7 +27,6 @@ const data = {
       description: "Height qualty product",
     },
     {
-      _id: "2",
       name: "Name 2",
       category: "Shirts",
       image: "/images/p2.jpg",
@@ -40,7 +38,6 @@ const data = {
       description: "Height qualty product",
     },
     {
-      _id: "3",
       name: "Name 3",
       category: "Pants",
       image: "/images/p3.jpg",
@@ -52,7 +49,6 @@ const data = {
       description: "Height qualty product",
     },
     {
-      _id: "4",
       name: "Name 4",
       category: "Shirts",
       image: "/images/p4.jpg",
@@ -64,7 +60,6 @@ const data = {
       description: "Height qualty product",
     },
     {
-      _id: "6",
       name: "Name 6",
       category: "Shirts",
       image: "/images/p6.jpg",
