@@ -6,6 +6,15 @@ import { isAuth } from "../utils.js";
 const orderRouter = express.Router();
 //isAuth is middelvare where we chack if user is authenticated
 //and if is than it can place order
+orderRouter.get(
+  "/mine",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id });
+    res.send(orders);
+  })
+);
+
 orderRouter.post(
   "/",
   isAuth,

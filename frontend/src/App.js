@@ -4,6 +4,7 @@ import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signout } from "./actions/userActions";
 import CartScreen from "./screens/CartScreen";
 import HomeScreen from "./screens/HomeScreen";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOdrerScreen from "./screens/PlaceOdrerScreen";
@@ -72,6 +73,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOdrerScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
           <Route path="/profile" component={ProfileScreen}></Route>
+          <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>
