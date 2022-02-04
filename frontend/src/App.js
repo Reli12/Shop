@@ -8,6 +8,7 @@ import OrderScreen from "./screens/OrderScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOdrerScreen from "./screens/PlaceOdrerScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShipingAdressScreen from "./screens/ShipingAdressScreen";
 import SigninScreen from "./screens/SigninScreen";
@@ -45,6 +46,12 @@ function App() {
                   <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
+                  <li>
+                    <Link to="/profile">User Prifile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
                   <Link to="#signout" onClick={signoutHandler}>
                     Sign out
                   </Link>
@@ -64,6 +71,7 @@ function App() {
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOdrerScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/profile" component={ProfileScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>
