@@ -32,7 +32,7 @@ export default function OrderScreen(props) {
           <ul>
             <li>
               <div className="card card-body">
-                <h2>Shipping</h2>
+                <h2>Shipping information</h2>
                 <p>
                   <strong>Name:</strong> {order.shippingAddress.fullName}
                   <br />
