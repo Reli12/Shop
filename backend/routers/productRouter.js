@@ -71,6 +71,7 @@ productRouter.put(
       product.rating = req.body.rating;
       product.numReviews = req.body.numReviews;
       product.description = req.body.description;
+      product.image = req.body.image;
       const updatedProduct = await product.save();
       res.send({ message: "Product updated", product: updatedProduct });
     } else {
