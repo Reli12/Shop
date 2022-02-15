@@ -100,7 +100,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     const { data } = await axios.delete(`/api/products/${productId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    dispatch({ type: PRODUCT_DELETE_SUCCES });
+    dispatch({ type: PRODUCT_DELETE_SUCCES, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message
