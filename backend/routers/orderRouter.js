@@ -1,9 +1,22 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
-import { isAuth } from "../utils.js";
+import { isAdmin, isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
+
+orderRouter.get(
+  "/",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    //with populate we grab the user name from User table
+    //that is like JOIN in SQL
+    const orders = await Order.find({}).populate("user", "name");
+    res.send(orders);
+  })
+);
+
 //isAuth is middelvare where we chack if user is authenticated
 //and if is than it can place order
 orderRouter.get(
