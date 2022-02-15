@@ -1,22 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { detailsOrder } from "../actions/orderActions";
+import { deliverOrder, detailsOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 import MessageBox from "../components/MessageBox";
 import LoadingBox from "../components/LoadingBox";
+import { ORDER_DELIVER_RESET } from "../constants/orderConstants";
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const {
+    loading: loadingDeliver,
+    error: errrDeliver,
+    succes: succesDeliver,
+  } = orderDeliver;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch({ type: ORDER_DELIVER_RESET });
     dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+  }, [dispatch, orderId, succesDeliver]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order._id));
+  };
 
   //conditional rendering first check if it has to loading and if it has error
   //if not loading and not have error then render all in return
@@ -43,7 +59,7 @@ export default function OrderScreen(props) {
                 </p>
                 {order.isDelivered ? (
                   <MessageBox variant="success">
-                    Delivered at:{order.deliverdAt}
+                    Delivered at:{order.deliveredAt.substring(0, 10)}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>
@@ -58,7 +74,7 @@ export default function OrderScreen(props) {
                 </p>
                 {order.isPaid ? (
                   <MessageBox variant="success">
-                    Paid at:{order.paidAt}
+                    Paid at:{order.paidAt.substring(0, 10)}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Paid</MessageBox>
@@ -126,6 +142,17 @@ export default function OrderScreen(props) {
                   <div>$ {order.totalPrice.toFixed(2)}</div>
                 </div>
               </li>
+              {userInfo.isAdmin && !order.isDelivered && (
+                <li>
+                  <button
+                    type="button"
+                    className="primary block"
+                    onClick={deliverHandler}
+                  >
+                    Deliver order
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>
