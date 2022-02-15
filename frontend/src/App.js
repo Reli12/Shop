@@ -18,6 +18,7 @@ import ShipingAdressScreen from "./screens/ShipingAdressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
+import PolicyScreen from "./screens/PolicyScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -45,6 +46,7 @@ function App() {
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
+            <Link to="/about">About us</Link>
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
@@ -72,9 +74,6 @@ function App() {
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
                   <li>
                     <Link to="/productlist">Products</Link>
                   </li>
@@ -117,8 +116,11 @@ function App() {
           ></AdminRoute>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/Policy" component={PolicyScreen}></Route>
         </main>
-        <footer className="row center">All right reserved</footer>
+        <footer className="row center">
+          <Link to="/Policy">Policy</Link>
+        </footer>
       </div>
     </BrowserRouter>
   );

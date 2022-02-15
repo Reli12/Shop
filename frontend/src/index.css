@@ -265,3 +265,9 @@ img.large {
 .table button {
   margin: 0 0.2rem;
 }
+
+.policy {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+}
